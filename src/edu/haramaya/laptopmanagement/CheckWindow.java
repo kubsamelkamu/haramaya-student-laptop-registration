@@ -76,10 +76,10 @@ public class CheckWindow extends RegistrationWindow{
             }
         });
 
-        checkWindow.enterButton.addActionListener(new ActionListener() {
+        enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String pcSerial = serialField.getText();
+                String pcSerial = Pc_serialField.getText();
                 String url = "jdbc:sqlite:student.db";
 
                 try (Connection conn = DriverManager.getConnection(url);
@@ -98,40 +98,17 @@ public class CheckWindow extends RegistrationWindow{
                         int age = rs.getInt("age");
                         char gender = rs.getString("Gender").charAt(0);
 
-                        // Create a new JFrame to display student information
-                        JFrame infoFrame = new JFrame("Student Information");
-                        infoFrame.setSize(500, 400);
-
-                        infoFrame.getContentPane().setBackground(new Color(0x2ecc71));
-                        infoFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                        // Create a JPanel to hold the information
-                        JPanel infoPanel = new JPanel();
-                        infoPanel.setLayout(new GridLayout(8, 2));
-
-                        // Add labels and values to the panel
-                        infoPanel.add(new JLabel("First Name:"));
-                        infoPanel.add(new JLabel(firstName));
-                        infoPanel.add(new JLabel("Last Name:"));
-                        infoPanel.add(new JLabel(lastName));
-                        infoPanel.add(new JLabel("Student ID:"));
-                        infoPanel.add(new JLabel(studentId));
-                        infoPanel.add(new JLabel("Laptop:"));
-                        infoPanel.add(new JLabel(laptop));
-                        infoPanel.add(new JLabel("Department:"));
-                        infoPanel.add(new JLabel(department));
-                        infoPanel.add(new JLabel("Contact:"));
-                        infoPanel.add(new JLabel(String.valueOf(contact)));
-                        infoPanel.add(new JLabel("Age:"));
-                        infoPanel.add(new JLabel(String.valueOf(age)));
-                        infoPanel.add(new JLabel("Gender:"));
-                        infoPanel.add(new JLabel(String.valueOf(gender)));
-
-                        // Add the panel to the frame
-                        infoFrame.add(infoPanel);
-
-                        // Set the frame to be visible
-                        infoFrame.setVisible(true);
+                        // Display student information using GUI
+                        JOptionPane.showMessageDialog(null,
+                                "Student Information:\n\n" +
+                                        "First Name: " + firstName + "\n" +
+                                        "Last Name: " + lastName + "\n" +
+                                        "Student ID: " + studentId + "\n" +
+                                        "Laptop: " + laptop + "\n" +
+                                        "Department: " + department + "\n" +
+                                        "Contact: " + contact + "\n" +
+                                        "Age: " + age + "\n" +
+                                        "Gender: " + gender);
                     } else {
                         JOptionPane.showMessageDialog(null, "No student found with the specified serial number.");
                     }
@@ -142,30 +119,22 @@ public class CheckWindow extends RegistrationWindow{
             }
         });
 
-
-        registrationWindow.deleteButton.addActionListener(new ActionListener() {
+            deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String URL = "jdbc:sqlite:student.db";
-                String pcSerial = serialField.getText();
+                String pcSerial = Pc_serialField.getText();
 
                 try (Connection conn = DriverManager.getConnection(URL);
                      Statement stmt = conn.createStatement()) {
-                    String deleteQuery = "DELETE FROM student WHERE Pc_serial = ?";
-                    PreparedStatement pstmt = conn.prepareStatement(deleteQuery);
-                    pstmt.setString(1, pcSerial);
+                    int rowCount = stmt.executeUpdate("DELETE FROM student WHERE Pc_serial = " + pcSerial);
 
-                    int rowCount = pstmt.executeUpdate();
-
-
-                    if (rowCount>0){
-                        deleted.setVisible(true);
-
+                    if (rowCount > 0) {
+                        System.out.println("Student deleted successfully.");
                     } else {
                         JOptionPane.showMessageDialog(null, "No student found with the given serial number.");
 
                     }
-
                 } catch (SQLException f) {
                     JOptionPane.showMessageDialog(null, "An error occurred while deleting student data.");
                     f.printStackTrace();
@@ -173,21 +142,26 @@ public class CheckWindow extends RegistrationWindow{
             }
         });
 
-        checkWindow.formatButton.addActionListener(new ActionListener() {
+        formatButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 String URL = "jdbc:sqlite:student.db";
+
+
                 String sql = "DROP TABLE student";
 
                 try {
                     Connection connection = DriverManager.getConnection(URL);
+
                     Statement statement = connection.createStatement();
+
                     statement.executeUpdate(sql);
+
                     statement.close();
                     connection.close();
 
-                    format.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "successfully Formated\n" +
+                            "           \uD83D\uDE2D.");
 
                 } catch (SQLException u) {
                     System.out.println("Error dropping table: " + u.getMessage());
