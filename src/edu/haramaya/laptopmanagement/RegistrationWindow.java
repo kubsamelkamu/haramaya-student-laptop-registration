@@ -5,6 +5,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class RegistrationWindow extends LaptopManagement{
 
     // creating buttons
@@ -173,6 +178,23 @@ public class RegistrationWindow extends LaptopManagement{
             String contact1 = contactField.getText();
             String age1 = ageField.getText();
             String gender1 = genderField.getText();
+
+
+            boolean valid_pc_serial = isValidSerialNumber(Pc_serial);
+            if (!(valid_pc_serial)){
+                Pc_serialField.setForeground(Color.RED);
+                Pc_serialField.setText("");
+                Pc_serialField.setText("invalid pc_serial");
+                return;
+            }
+
+            boolean validFirstName = isVAlidName(firstname1);
+            if (!(validFirstName)){
+                firstnameField.setForeground(Color.RED);
+                firstnameField.setText("");
+                firstnameField.setText("invalid name");
+                return;
+            }
 
             DefaultTableModel model1 = (DefaultTableModel) table.getModel();
             model1.addRow(new Object[]{Pc_serial, firstname1, lastname1, student_id1, laptop1, department1, contact1, age1, gender1});
