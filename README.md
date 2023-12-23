@@ -1,4 +1,4 @@
-#Student Laptop Management System
+# Student Laptop Management System
 
 A user-friendly application for managing student and staff laptop records.
 
@@ -18,14 +18,12 @@ Swing: Java library for building desktop GUI applications
 MySQL: Open-source relational database management system
 
 Installation
-
 Prerequisites:
-
 Java SE Development Kit (JDK) installed on your system
 MySQL database server set up and running
 MySQL Connector/J library (included in the project root folder)
-Steps:
 
+Steps:
 Download the project ZIP file or clone the repository.
 Extract the contents to your desired location.
 
@@ -34,7 +32,6 @@ Run the application:
 Open a terminal or command prompt in the project directory.
 
 Execute the following command:
-
 Bash
 java haramaya-student-laptop-registration.jar
 Use code with caution. 
@@ -58,7 +55,6 @@ Make your changes and commit them with descriptive messages.
 Create a pull request to merge your changes into the main branch.
 Feel free to submit issues or pull requests if you encounter any bugs or have suggestions for improvement.
 
-License:
-    This project is released under the MIT License. Please refer to the LICENSE file for more details.
-Links and Resources:
+License:This project is released under the MIT License. Please refer to the LICENSE file for more details.
+Links and Resources: https://github.com/Kirubel-Amare/haramaya-student-laptop-registration
     
