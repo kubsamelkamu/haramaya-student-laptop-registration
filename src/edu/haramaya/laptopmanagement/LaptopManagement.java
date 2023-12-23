@@ -21,8 +21,7 @@ public class LaptopManagement {
     }
 
     public static void main(String[] args) {
-        openRegistrationFirstWindow();
-
+       new Loading();
 
     }
     public static void openRegistrationFirstWindow() {
